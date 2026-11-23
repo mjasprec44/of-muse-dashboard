@@ -27,7 +27,7 @@ export function ChartBardGrid({
   isLoading = false,
 }: AppBarChartProps) {
   if (isLoading) {
-    return <Skeleton className="h-52 w-full bg-red-500 rounded-md" />;
+    return <Skeleton className="h-52 w-full bg-muted rounded-md" />;
   }
 
   if (!data || data.length === 0) {

@@ -11,6 +11,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { ROUTES } from "@/constants/routes";
 import {
   Briefcase,
   CreditCard,
@@ -18,20 +19,25 @@ import {
   LogOut,
   Settings,
   Users,
+  UsersRoundCollaborationIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 // Define your navigation items
 const mainNav = [
-  { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
-  { title: "Projects", url: "/projects", icon: Briefcase },
-  { title: "Clients", url: "/clients", icon: Users },
+  { title: "Dashboard", url: ROUTES.DASHBOARD, icon: LayoutDashboard },
+  { title: "Creators", url: ROUTES.CREATORS, icon: Users },
+  {
+    title: "Chatters",
+    url: ROUTES.CHATTERS,
+    icon: UsersRoundCollaborationIcon,
+  },
 ];
 
 const settingsNav = [
-  { title: "Settings", url: "/settings", icon: Settings },
-  { title: "Billing", url: "/billing", icon: CreditCard },
+  { title: "Settings", url: ROUTES.SETTINGS, icon: Settings },
+  { title: "Billing", url: ROUTES.BILLING, icon: CreditCard },
 ];
 
 export function AppSidebar() {
@@ -53,7 +59,7 @@ export function AppSidebar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Platform</SidebarGroupLabel>
+          <SidebarGroupLabel>Main</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {mainNav.map((item) => (
