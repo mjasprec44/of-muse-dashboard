@@ -41,7 +41,9 @@ export function AppSidebar() {
       <SidebarHeader>
         <div className="flex items-center gap-2 px-4 py-2">
           <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <Briefcase className="size-4" />
+            <Link href="/" className="flex gap-2">
+              <Briefcase className="size-4" />
+            </Link>
           </div>
           <div className="flex flex-col gap-0.5 leading-none">
             <span className="font-semibold">Muse</span>

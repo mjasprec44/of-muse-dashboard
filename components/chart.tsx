@@ -10,41 +10,40 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
+import { Skeleton } from "./ui/skeleton";
 
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80, other: 99 },
-  { month: "February", desktop: 305, mobile: 200, other: 99 },
-  { month: "March", desktop: 237, mobile: 120, other: 99 },
-  { month: "April", desktop: 73, mobile: 190, other: 99 },
-  { month: "May", desktop: 209, mobile: 130, other: 99 },
-  { month: "June", desktop: 214, mobile: 140, other: 99 },
-];
+interface AppBarChartProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: Record<string, any>[]; // The array of data objects
+  config: ChartConfig; // The config object
+  xAxisKey: string; // What key to use for the X-axis (e.g., "month")
+  isLoading?: boolean; // Optional loading state
+}
 
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "#2563eb",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "#60a5fa",
-  },
-  other: {
-    label: "Other",
-    color: "#eee",
-  },
-} satisfies ChartConfig;
+export function ChartBardGrid({
+  data,
+  config,
+  xAxisKey,
+  isLoading = false,
+}: AppBarChartProps) {
+  if (isLoading) {
+    return <Skeleton className="h-52 w-full bg-red-500 rounded-md" />;
+  }
 
-export function ChartBarDemoGrid() {
+  if (!data || data.length === 0) {
+    return (
+      <div className="flex h-75 w-full items-center justify-center rounded-md border border-dashed text-sm text-muted-foreground">
+        No data available
+      </div>
+    );
+  }
+
   return (
-    <ChartContainer
-      config={chartConfig}
-      className="min-h-50 border border-blue-500 w-full"
-    >
-      <BarChart accessibilityLayer data={chartData}>
-        <CartesianGrid vertical={false} />{" "}
+    <ChartContainer config={config} className="min-h-50 border ">
+      <BarChart accessibilityLayer data={data}>
+        <CartesianGrid vertical={false} />
         <XAxis
-          dataKey="month"
+          dataKey={xAxisKey}
           tickLine={false}
           tickMargin={10}
           axisLine={false}
@@ -52,9 +51,14 @@ export function ChartBarDemoGrid() {
         />
         <ChartTooltip content={<ChartTooltipContent />} />
         <ChartLegend content={<ChartLegendContent />} />
-        <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-        <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
-        <Bar dataKey="other" fill="var(--color-other)" radius={4} />
+        {Object.entries(config).map(([key, config]) => (
+          <Bar
+            key={key}
+            dataKey={key}
+            fill={`var(--color-${key})`}
+            radius={4}
+          />
+        ))}
       </BarChart>
     </ChartContainer>
   );
