@@ -13,25 +13,49 @@ import {
 } from "@/components/ui/sidebar";
 import { ROUTES } from "@/utils/constants/routes";
 import {
-  Briefcase,
+  ChartColumnBigIcon,
   CreditCard,
+  Headset,
   LayoutDashboard,
   LogOut,
+  Megaphone,
   Settings,
   Users,
-  UsersRoundCollaborationIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 // Define your navigation items
 const mainNav = [
-  { title: "Dashboard", url: ROUTES.DASHBOARD, icon: LayoutDashboard },
-  { title: "Creators", url: ROUTES.CREATORS, icon: Users },
+  {
+    title: "Dashboard",
+    description: "Agency-wide KPIs and trends",
+    url: ROUTES.DASHBOARD,
+    icon: LayoutDashboard,
+  },
+  {
+    title: "Creators",
+    description: "Performance and account status",
+    url: ROUTES.CREATORS,
+    icon: Users,
+  },
   {
     title: "Chatters",
+    description: "Sales and productivity",
     url: ROUTES.CHATTERS,
-    icon: UsersRoundCollaborationIcon,
+    icon: Headset,
+  },
+  {
+    title: "Promotions",
+    description: "Tracking links and acquisition",
+    url: ROUTES.PROMOTIONS,
+    icon: Megaphone,
+  },
+  {
+    title: "Fans",
+    description: "Subscriber growth, spending, and retention",
+    url: ROUTES.FANS,
+    icon: Users,
   },
 ];
 
@@ -48,26 +72,35 @@ export function AppSidebar() {
         <div className="flex items-center gap-2 px-4 py-2">
           <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <Link href="/" className="flex gap-2">
-              <Briefcase className="size-4" />
+              <ChartColumnBigIcon className="size-4" />
             </Link>
           </div>
           <div className="flex flex-col gap-0.5 leading-none">
-            <span className="font-semibold">Muse</span>
+            <h1 className="font-semibold text-lg">Agency Dashboard</h1>
           </div>
         </div>
       </SidebarHeader>
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Main</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-lg">Main</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {mainNav.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton isActive={pathname === item.url}>
-                    <Link href={item.url} className="flex gap-2">
-                      <item.icon />
-                      <span>{item.title}</span>
+                  <SidebarMenuButton
+                    isActive={pathname === item.url}
+                    className="h-auto"
+                  >
+                    <Link href={item.url} className="flex items-center gap-3">
+                      <item.icon className="h-5! w-5!" />
+
+                      <div className="flex flex-col gap-0">
+                        <p className="text-lg tracking-wider">{item.title}</p>
+                        {/* <span className="text-muted-foreground text-xs p-0">
+                          {item.description}
+                        </span> */}
+                      </div>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -76,15 +109,15 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
-          <SidebarGroupLabel>Settings</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-lg">Settings</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {settingsNav.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton isActive={pathname === item.url}>
-                    <Link className="flex gap-2" href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
+                    <Link className="flex items-center gap-3" href={item.url}>
+                      <item.icon className="h-5! w-5!" />
+                      <p className="text-lg tracking-wider">{item.title}</p>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
