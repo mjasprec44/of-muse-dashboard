@@ -19,11 +19,14 @@ const CreatorsContent = async () => {
     };
   });
 
-  console.log("creators", creators);
   return (
     <main className="container">
       <section className="px-2 py-4 md:py-8 md:px-8 grid sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2">
-        <DataTable columns={columns} data={filteredCreator} />
+        <DataTable
+          columns={columns}
+          data={filteredCreator}
+          className="col-span-full"
+        />
       </section>
     </main>
   );

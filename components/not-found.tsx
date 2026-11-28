@@ -34,9 +34,9 @@ export function NotFound() {
             <Kbd>/</Kbd>
           </InputGroupAddon>
         </InputGroup>
-        <EmptyDescription>
+        {/* <EmptyDescription>
           Need help? <a href="#">Contact support</a>
-        </EmptyDescription>
+        </EmptyDescription> */}
       </EmptyContent>
     </Empty>
   );

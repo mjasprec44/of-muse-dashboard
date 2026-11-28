@@ -20,11 +20,13 @@ import {
 interface DataTableProps<TData extends RowData> {
   columns: ColumnDef<DataTableFeatures, TData>[];
   data: TData[];
+  className: string;
 }
 
 export function DataTable<TData extends RowData>({
   columns,
   data,
+  className,
 }: DataTableProps<TData>) {
   const table = useTable({
     features,
@@ -33,7 +35,7 @@ export function DataTable<TData extends RowData>({
   });
 
   return (
-    <div className="overflow-hidden rounded-md border">
+    <div className={`overflow-hidden rounded-md border ${className}`}>
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (

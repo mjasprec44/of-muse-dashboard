@@ -1,4 +1,4 @@
-import { ParamsType } from "./types";
+import { BaseParamsType } from "./types";
 
 const config = {
   apiKey: process.env.INFLOWW_API_KEY,
@@ -14,7 +14,7 @@ const AGENCY_OID: string = config.agencyOid;
 
 export async function fetchInfloww<T>(
   endpoint: string,
-  params?: ParamsType,
+  params?: BaseParamsType,
 ): Promise<T> {
   const url = new URL(`https://openapi.infloww.com/v1${endpoint}`);
 
